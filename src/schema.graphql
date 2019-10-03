@@ -4,7 +4,16 @@ type Query {
     users(query: String, first: Int, skip: Int, after: String, orderBy: UserOrderByInput): [User!]!
     me: User!
 }
-
+# Usuarios campos
+type User {
+    id: ID!
+    name: String!
+    email: String
+    password: String!
+    updatedAt: String!
+    createdAt: String!
+}
+# Usuarios mutaciones para crear, actualizar, borrar y loguearse
 type Mutation {
     createUser(data: CreateUserInput!): AuthPayload!
     login(data: LoginUserInput!): AuthPayload!
@@ -15,38 +24,31 @@ type Mutation {
 # type Subscription {
 
 # }
-
+# valores que se devuelven en createUser y login, token + user
 type AuthPayload {
     token: String!
     user: User!
 }
-
+# valores que se envian en crear usuario
 input CreateUserInput {
     name: String!
     email: String!
     password: String!
 }
-
+# valores que se envian login
 input LoginUserInput {
     email: String!
     password: String!
 }
-
+# valores que se envian actualizar
 input UpdateUserInput {
     name: String
     email: String
     password: String
 }
 
-type User {
-    id: ID!
-    name: String!
-    email: String
-    password: String!
-    updatedAt: String!
-    createdAt: String!
-}
 
+# Tipo de mutacion que se crean en las subcripciones para escuchar eventos
 enum MutationType {
     CREATED
     UPDATED
